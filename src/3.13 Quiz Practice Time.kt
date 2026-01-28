@@ -7,26 +7,38 @@ fun main() {
 }
 
 //funcion que define que hacer hoy segun las condiciones
+//ahora manda a llamar a otras funciones dependiendo del contexto para decidir su resultado
 fun whatShouldIDoToday(
     mood: String,
     weather: String = "sunny",
     temperature: Int = 24
-): String {
+): String =
+    when {
+        isFreezingSadRainy(mood, weather, temperature) ->
+            "stay in bed"
 
-    return when {
-        mood == "happy" && weather == "sunny" && temperature > 25 ->
+        isVeryHot(temperature) ->
             "go swimming"
 
-        mood == "happy" && weather == "sunny" ->
-            "go for a walk"
-
-        mood == "sad" && weather == "rainy" ->
-            "stay in bed and watch a movie"
-
-        temperature < 10 ->
+        isCold(temperature) ->
             "stay home and drink something hot"
+
+        isHappySunny(mood, weather) ->
+            "go for a walk"
 
         else ->
             "Stay home and read."
     }
-}
+
+fun isFreezingSadRainy(mood: String, weather: String, temperature: Int) =
+    mood == "sad" && weather == "rainy" && temperature == 0
+
+fun isVeryHot(temperature: Int) =
+    temperature > 35
+
+fun isCold(temperature: Int) =
+    temperature < 10
+
+fun isHappySunny(mood: String, weather: String) =
+    mood == "happy" && weather == "sunny"
+
