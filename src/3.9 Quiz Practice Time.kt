@@ -1,13 +1,12 @@
 //IGUAL QUE EL ANTERIOR SIMPLEMENTE SEPARE FUNCIONALIDADES
-fun main(args: Array<String>) {
-    var fortune: String
-
-    for (i in 1..10) {
-        fortune = getFortune(getBirthday())
-        println("\nYour fortune is: $fortune")
-        if (fortune.contains("Take it easy")) break
+// ahora se utiliza repeat
+fun main() {
+    repeat(10) {
+        val fortune = getFortune(getBirthday())
+        println("Your fortune is: $fortune")
     }
 }
+
 
 fun getBirthday(): Int {
     print("Enter your birthday: ")
